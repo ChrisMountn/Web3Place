@@ -5,4 +5,5 @@ The contract holds a 1000x1000 array of pixel structs, which compose the full mi
 
 The solidity code is contained in Web3Place/Web3_Place_Truffle/contracts/Web3Place.sol. 
 
+
 The unit tests written in JavaScript are contained in Web3Place/Web3_Place_Truffle/test/web3_place_test.js
