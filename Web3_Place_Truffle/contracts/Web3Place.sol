@@ -1,5 +1,3 @@
-//CHANGE LOGIC TO PIXEL OWNERSHIP AND COLOURING. THEN WRITE TESTS AND PUBLISH TO GET. THEN GET IN TOUCH WITH MF STARKWARE
-
 // SPDX-License-Identifier: GPL-3.0
 // No need to use SafeMath, as lowest allowed version is 0.8.0
 pragma solidity ^0.8.0;
