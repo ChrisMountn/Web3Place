@@ -32,13 +32,25 @@ contract("Web3Place", accounts => {
         let pixel = await instance.pixels(43, 987);
         assert.equal(pixel.colour, 0xeaff08);
     });
-    
+
     it("testing withdrawProfit", async () => {
         let instance = await Web3Place.new();
-        await instance.buyPixel(1, 2, {value: web3.utils.toWei("1", "Ether"), from: accounts[1]});
-        await instance.buyPixel(1, 2, {value: web3.utils.toWei("3", "Ether"), from: accounts[3]});
+        let prevBalance = await web3.eth.getBalance(accounts[1]);
+
+        await instance.buyPixel(1, 2, {value: web3.utils.toWei("1", "ether"), from: accounts[1]});
+        await instance.buyPixel(1, 2, {value: web3.utils.toWei("3", "ether"), from: accounts[3]});
         await instance.withdrawProfit({from: accounts[1]});
-        //check account value in network. Should have incremented by 2 from original value. 
+
+        //check account value in network. Should have incremented by 2 from original value.
+
+        let currentBalance = await web3.eth.getBalance(accounts[1]);
+        let expectedDifference = web3.utils.toWei("2", "ether");
+        console.log("Account Balance Before: ", prevBalance/(1000000000000000000));
+        console.log("Account Balance After", currentBalance/(1000000000000000000));
+
+        let gasCost = expectedDifference - (currentBalance - prevBalance);
+        console.log("gasCost: ", gasCost);
+
+        assert(0 < gasCost < 1000000000000000, "Balance Incorrect");
     });
-    
 });
